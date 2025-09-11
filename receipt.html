@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Receipt</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background: #f4f6f9;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .receipt {
+      max-width: 450px;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+      border: 1px solid #ddd;
+    }
+    .header {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .success-icon {
+      font-size: 55px;
+      color: #4caf50;
+      margin-bottom: 10px;
+    }
+    .details {
+      padding: 20px;
+    }
+    .details p {
+      margin: 10px 0;
+      font-size: 15px;
+      color: #333;
+    }
+    .details span {
+      float: right;
+      font-weight: bold;
+      color: #111;
+    }
+    .txn-info {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-top: 15px;
+      border: 1px solid #eee;
+    }
+    .txn-info p {
+      margin: 5px 0;
+    }
+    .footer {
+      background: #fafafa;
+      padding: 12px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      border-top: 1px solid #eee;
+    }
+    .fail {
+      color: red;
+      font-size: 18px;
+      padding: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="receipt" id="output"></div>
+
+<script>
+  function getParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  let accountNo = getParam("accountNo");
+  let record = localStorage.getItem(accountNo);
+  let output = document.getElementById("output");
+
+  if (record) {
+    let data = JSON.parse(record);
+    output.innerHTML = `
+      <div class="header">
+        <div class="success-icon">✔</div>
+        <h2>Payment Successful</h2>
+      </div>
+      <div class="details">
+        <p>Bank Name: <span>${data.bankName}</span></p>
+        <p>Account No: <span>${accountNo}</span></p>
+        <p>Account Holder: <span>${data.holderName}</span></p>
+        <p>Mobile No: <span>${data.mobileNo}</span></p>
+        <p>Amount: <span>₹${data.amount}</span></p>
+        <p>Date & Time: <span>${data.dateTime}</span></p>
+        <p>Charges: <span>₹${data.charges}</span></p>
+        <p>Sender: <span>${data.sender}</span></p>
+        <div class="txn-info">
+          <p>UPI ID: <b>${data.upiId || "user@upi"}</b></p>
+          <p>Txn ID: <b>${data.txnId || "T" + Math.floor(100000000000+Math.random()*900000000000)}</b></p>
+        </div>
+      </div>
+      <div class="footer">
+        This is a system generated receipt.<br>
+        Verified by PhonePe / Bank API.
+      </div>
+    `;
+  } else {
+    output.innerHTML = `
+      <div class="fail">
+        ❌ No Record Found<br><br>
+        The entered Account No <b>${accountNo}</b> does not exist in system.
+      </div>
+    `;
+  }
+</script>
+
+</body>
+</html>
