@@ -1,99 +1,129 @@
- <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-  <title>Bank Transaction Details</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 50px; background: #f5f7fa; }
-            .card {
-                  border: 1px solid #ccc;
-                        padding: 20px;
-                              border-radius: 12px;
-                                    max-width: 500px;
-                                          margin: auto;
-                                                background: white;
-                                                      box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
-                                                          }
-                                                              h2 { text-align: center; color: #004080; }
-                                                                  p { font-size: 16px; line-height: 1.6; }
-                                                                      b { color: #222; }
-                                                                        </style>
-                                                                          <script>
-                                                                              // Updated Bank Accounts Data
-                                                                                  const accounts = {
-                                                                                        "39633196483": {
-                                                                                                bank: "State Bank Of India",
-                                                                                                        accountNo: "39633196483",
-                                                                                                                name: "Tahseena Khatoon",
-                                                                                                                        mobile: "7055778758",
-                                                                                                                                amount: "2,00,000 INR",
-                                                                                                                                        dateTime: "09-Sep-2025 12:59 PM",
-                                                                                                                                                charges: "5000 INR",
-                                                                                                                                                        description: "Transfer Amount By Salman Khan HYC Mobile No.+923011029457 "
-                                                                                                                                                              },
-                                                                                                                                                                    "10580824170": {
-                                                                                                                                                                            bank: "State Bank Of India",
-                                                                                                                                                                                    accountNo: "10580824170",
-                                                                                                                                                                                            name: "Tauheed MD. Raees",
-                                                                                                                                                                                                    mobile: "9321803244",
-                                                                                                                                                                                                            amount: "5,00,000 INR",
-                                                                                                                                                                                                                    dateTime: "09-Sep-2025 10:15 AM",
-                                                                                                                                                                                                                            charges: "4100",
-                                                                                                                                                                                                                                    description: "Amount Send by salman Khan HYC"
-                                                                                                                                                                                                                                          },
-                                                                                                                                                                                                                                                "34809291227": {
-                                                                                                                                                                                                                                                        bank: "State Bank of India",
-                                                                                                                                                                                                                                                                accountNo: "34809291227",
-                                                                                                                                                                                                                                                                        name: "Mohammad Shabir",
-                                                                                                                                                                                                                                                                                mobile: "9955009725",
-                                                                                                                                                                                                                                                                                        amount: "1,50,000 INR",
-                                                                                                                                                                                                                                                                                                dateTime: "10-Sep-2025 02:45 PM",
-                                                                                                                                                                                                                                                                                                        charges: "10,000 INR",
-                                                                                                                                                                                                                                                                                                                description: "Amount send by Salman Khan HYC Mobile No. 923011029457"
-                                                                                                                                                                                                                                                                                                                      }
-                                                                                                                                                                                                                                                                                                                          };
-
-                                                                                                                                                                                                                                                                                                                              function showDetails() {
-                                                                                                                                                                                                                                                                                                                                    const params = new URLSearchParams(window.location.search);
-                                                                                                                                                                                                                                                                                                                                          const account = params.get("account");
-
-                                                                                                                                                                                                                                                                                                                                                const person = accounts[account];
-                                                                                                                                                                                                                                                                                                                                                      if (person) {
-                                                                                                                                                                                                                                                                                                                                                              document.getElementById("details").innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                        <div class="card">
-                                                                                                                                                                                                                                                                                                                                                                                    <h2>🏦 Bank Transaction Details</h2>
-                                                                                                                                                                                                                                                                                                                                                                                                <p><b>Bank Name:</b> ${person.bank}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                            <p><b>Account No:</b> ${person.accountNo}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                        <p><b>Account Holder Name:</b> ${person.name}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                    <p><b>Mobile Number:</b> ${person.mobile}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                <p><b>Transfer Amount:</b> ${person.amount}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p><b>Date & Time:</b> ${person.dateTime}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <p><b>GST TAX ONLINE:</b> ${person.charges}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <style>
-    .pending {
-      color: red;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Receipt</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background: #f4f6f9;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .receipt {
+      max-width: 450px;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+      border: 1px solid #ddd;
+    }
+    .header {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .success-icon {
+      font-size: 55px;
+      color: #4caf50;
+      margin-bottom: 10px;
+    }
+    .details {
+      padding: 20px;
+    }
+    .details p {
+      margin: 10px 0;
+      font-size: 15px;
+      color: #333;
+    }
+    .details span {
+      float: right;
       font-weight: bold;
+      color: #111;
+    }
+    .txn-info {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-top: 15px;
+      border: 1px solid #eee;
+    }
+    .txn-info p {
+      margin: 5px 0;
+    }
+    .footer {
+      background: #fafafa;
+      padding: 12px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      border-top: 1px solid #eee;
+    }
+    .fail {
+      color: red;
+      font-size: 18px;
+      padding: 30px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <p>Status: <span class="pending">Amount in Pending</span></p>
+
+<div class="receipt" id="output"></div>
+
+<script>
+  function getParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  let accountNo = getParam("accountNo");
+  let record = localStorage.getItem(accountNo);
+  let output = document.getElementById("output");
+
+  if (record) {
+    let data = JSON.parse(record);
+    output.innerHTML = `
+      <div class="header">
+        <div class="success-icon">✔</div>
+        <h2>Payment Successful</h2>
+      </div>
+      <div class="details">
+        <p>Bank Name: <span>${data.bankName}</span></p>
+        <p>Account No: <span>${accountNo}</span></p>
+        <p>Account Holder: <span>${data.holderName}</span></p>
+        <p>Mobile No: <span>${data.mobileNo}</span></p>
+        <p>Amount: <span>₹${data.amount}</span></p>
+        <p>Date & Time: <span>${data.dateTime}</span></p>
+        <p>Charges: <span>₹${data.charges}</span></p>
+        <p>Sender: <span>${data.sender}</span></p>
+        <div class="txn-info">
+          <p>UPI ID: <b>${data.upiId || "user@upi"}</b></p>
+          <p>Txn ID: <b>${data.txnId || "T" + Math.floor(100000000000+Math.random()*900000000000)}</b></p>
+        </div>
+      </div>
+      <div class="footer">
+        This is a system generated receipt.<br>
+        Verified by PhonePe / Bank API.
+      </div>
+    `;
+  } else {
+    output.innerHTML = `
+      <div class="fail">
+        ❌ No Record Found<br><br>
+        The entered Account No <b>${accountNo}</b> does not exist in system.
+      </div>
+    `;
+  }
+</script>
+
 </body>
-                                                                                                                                                                                                                                                                                                                                                            
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <p><b>Sender Details:</b> ${person.description}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      `;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } else {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    document.getElementById("details").innerHTML = `<p style="color:red; text-align:center;">❌ No record found for Account: ${account}</p>`;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </head>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <body onload="showDetails()">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <div id="details"></div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </body>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </html
+</html>
